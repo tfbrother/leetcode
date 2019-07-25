@@ -93,3 +93,45 @@ func addTwoNumbers2(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	return dummyHead.Next
 }
+
+// 解法三：不修改l1和l2
+// 核心是carry的处理。
+func addTwoNumbers3(l1 *ListNode, l2 *ListNode) *ListNode {
+	head, val, carry := &ListNode{}, 0, 0
+	cur := head
+
+	for l1 != nil || l2 != nil {
+		if l1 != nil && l2 != nil {
+			val = l1.Val + l2.Val
+			l1, l2 = l1.Next, l2.Next
+		} else if l1 != nil {
+			val = l1.Val
+			l1 = l1.Next
+		} else if l2 != nil {
+			val = l2.Val
+			l2 = l2.Next
+		}
+
+		// 处理上一次循环中产生的进位
+		if carry == 1 {
+			val += 1
+			carry = 0
+		}
+
+		// 记录本一次循环中产生的进位
+		if val >= 10 {
+			val %= 10
+			carry = 1
+		}
+
+		cur.Next = &ListNode{Val: val}
+		cur = cur.Next
+	}
+
+	if carry == 1 {
+		// 这里的Val只可能为1，要注意这个性质
+		cur.Next = &ListNode{Val: 1}
+	}
+
+	return head.Next
+}
