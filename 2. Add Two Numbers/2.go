@@ -63,7 +63,6 @@ func addTwoNumbers2(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	for l1 != nil || l2 != nil {
 		if l1 != nil && l2 != nil {
-			// 按位相加，进位后面的循环中来进行处理。
 			l1.Val += l2.Val
 			cur = l1
 			l1, l2 = l1.Next, l2.Next
@@ -80,9 +79,10 @@ func addTwoNumbers2(l1 *ListNode, l2 *ListNode) *ListNode {
 		if cur.Val >= 10 { // 处理进位
 			prod = cur.Val / 10
 			cur.Val = cur.Val % 10
-			// 这里的逻辑还没有真正搞明白，虽然用例都通过了。
-			if cur.Next == nil { // 这个新插入的结点要插入到l1中去才行，如果插入l2中将无法通过，为什么？
-				// todo 此处是核心，核心。
+			// TODO 这里的逻辑是核心
+			if cur.Next == nil {
+				// 这个新插入的结点要插入到l1中去才行，如果插入l2中将无法通过，为什么？
+				// 因为当cur.Next == nil时，l1肯定为nil，而l2不一定为nil。仔细阅读自己的代码逻辑。所以此处不能放入到l2中。
 				l1 = &ListNode{prod, nil}
 				cur.Next = l1 // 如果不执行这段代码，将cur串起来，将不会得到正确的结果
 			} else {
