@@ -198,10 +198,15 @@ func addTwoNumbers21(l1 *ListNode, l2 *ListNode) *ListNode {
 	// 需要在链表头增加一个链表
 	if head.Next.Val > 9 {
 		// 核心，思考清楚逻辑
-		prev, next := &ListNode{Val: 1}, head.Next
+		//prev, next := &ListNode{Val: 1}, head.Next
+		//head.Next = prev
+		//next.Val %= 10
+		//prev.Next = next
+
+		// 省略调next变量，再次精简代码
+		head.Next.Val %= 10
+		prev := &ListNode{Val: 1, Next: head.Next}
 		head.Next = prev
-		next.Val %= 10
-		prev.Next = next
 	}
 
 	return head.Next
@@ -304,8 +309,7 @@ func addTwoNumbers31(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 
 		// TODO 这里就是反转链表，或者说是从尾部创建链表。
-		node = &ListNode{Val: val}
-		node.Next = head
+		node = &ListNode{Val: val, Next: head}
 		head = node
 	}
 
@@ -412,8 +416,8 @@ func addTwoNumbers5(l1 *ListNode, l2 *ListNode) *ListNode {
 		carry = val / 10
 		// TODO 仔细和反转链表代码对比，这他妈其实就是在反转链表啊。
 		// 本质就是从头开始创建链表或者从尾部开始创建链表的区别。这是基本功啊。
-		node := &ListNode{val % 10, nil}
-		node.Next = head
+		node := &ListNode{val % 10, head}
+		//node.Next = head
 		head = node
 	}
 
