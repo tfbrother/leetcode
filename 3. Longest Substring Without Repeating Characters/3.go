@@ -14,7 +14,7 @@ Memory Usage: 3.1 MB, less than 56.29% of Go online submissions for Longest Subs
 // 在滑动窗口中做记录
 func lengthOfLongestSubstring(s string) int {
 	// 初始值的设定很重要，一定要搞清楚每一个的定义
-	// i，j表示窗口的左右边界
+	// i，j表示窗口的左右边界，charIndex存储的是已遍历的字符在s中最后出现的位置，主要用来和i比较的。
 	i, j, charIndex, max, find, length, index := 0, 0, make(map[byte]int), 0, false, 0, -1
 
 	for j < len(s) {

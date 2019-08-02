@@ -32,7 +32,7 @@ func minWindow(s string, t string) string {
 
 	for r < len(s) {
 		// fmt.Println("l===", l, ";r===", r)
-		if _, find := charCount2[s[r]]; find { // 窗口从j+1开始
+		if _, find := charCount2[s[r]]; find {
 			charCount1[s[r]]++
 
 			if charCount1[s[r]] == charCount2[s[r]] {
