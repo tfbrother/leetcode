@@ -303,9 +303,10 @@ func FindAnagrams2(s string, p string) []int {
 	return ret
 }
 
-// 参考自其它答案
+// 解法三：参考自其它答案
 // 优化内存使用，因为题目中字符串只包含小写英文字母，这个条件还没用到。
 // 	1. 首先matches的含义不一样了。
+// TODO 算法思想尚未理解清楚，该解法目前是性能最高的解法。
 func FindAnagrams3(s string, p string) []int {
 	if len(s) < len(p) {
 		return make([]int, 0)
@@ -320,11 +321,18 @@ func FindAnagrams3(s string, p string) []int {
 
 	for l, r := 0, 0; r < len(s); r++ {
 		count[s[r]-'a']-- // 可能为负数哦
+		// 初始情况下count中大于0的表示p中的字符，如果对其进行减1后
+		// 其值大于等于0，则说明s[r]在p中。
 		if (count[s[r]-'a']) >= 0 {
 			matches++
 		}
 
+		// 1. 维持窗口的大小不变
+		// 2. 窗口中做记录：matches的定义是什么？窗口中匹配字母的个数
 		if r >= len(p) {
+			// 如果s[l]不在p中，则会先count[s[l]-'a']--，后面才会对count[s[l]-'a']++
+			// 此时count[s[l]-'a']等于0。如果count[s[l]-'a']>0，则说明s[l]在p中
+			// 所以在窗口的移动过程中，要维持matches变量的定义不变。
 			count[s[l]-'a']++
 			if (count[s[l]-'a']) > 0 {
 				matches--

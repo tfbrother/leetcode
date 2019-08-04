@@ -140,6 +140,47 @@ func checkInclusion2(s2 string, s1 string) bool {
 	return false
 }
 
+/*
+Runtime: 0 ms, faster than 100.00% of Go online submissions for Permutation in String.
+Memory Usage: 2.7 MB, less than 100.00% of Go online submissions for Permutation in String.
+*/
+// 解法三：和[438]解法三一摸一样
+func checkInclusion3(s2 string, s1 string) bool {
+	if len(s1) < len(s2) {
+		return false
+	}
+
+	i, l, r, matches := 0, 0, 0, 0
+	var count [26]int
+
+	for i = 0; i < len(s2); i++ {
+		count[s2[i]-'a']++
+	}
+
+	for ; r < len(s1); r++ {
+		i = int(s1[r] - 'a')
+		count[i]--
+		if count[i] >= 0 {
+			matches++
+		}
+
+		if r >= len(s2) {
+			i = int(s1[l] - 'a')
+			count[i]++
+			if count[i] > 0 {
+				matches--
+			}
+			l++
+		}
+
+		if matches == len(s2) {
+			return true
+		}
+	}
+
+	return false
+}
+
 // 参考自英文版0ms的答案
 // 此解法很精妙，438也可以采用
 func checkInclusion_en(s1 string, s2 string) bool {
