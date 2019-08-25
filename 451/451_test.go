@@ -28,11 +28,17 @@ func BenchmarkFrequencySort1_41e4(b *testing.B) { bench(b, 1e4, FrequencySort1_4
 func BenchmarkFrequencySort_en1e4(b *testing.B) { bench(b, 1e4, FrequencySort_en, "FrequencySort_en") }
 
 /*
-BenchmarkFrequencySort11e4-4     	   10000	    146655 ns/op
-BenchmarkFrequencySort1_11e4-4   	   10000	    138514 ns/op
-BenchmarkFrequencySort1_21e4-4   	   10000	    120669 ns/op
-BenchmarkFrequencySort1_31e4-4   	   20000	     98178 ns/op
-BenchmarkFrequencySort1_41e4-4   	   20000	     89451 ns/op
-BenchmarkFrequencySort_en1e4-4   	   20000	    100934 ns/op
+# go test -bench=. -benchmem
+goos: darwin
+goarch: amd64
+pkg: github.com/tfbrother/leetcode/451
+ Benchmark 名字 - CPU核数				   循环次数          平均每次执行时间		内存占用字节数/每次	内存分配数/每次
+BenchmarkFrequencySort11e4-4               10000            144521 ns/op           75328 B/op        904 allocs/op
+BenchmarkFrequencySort1_11e4-4             10000            135440 ns/op           49226 B/op        897 allocs/op
+BenchmarkFrequencySort1_21e4-4             10000            117860 ns/op           52476 B/op        814 allocs/op
+BenchmarkFrequencySort1_31e4-4             10000            101549 ns/op           26840 B/op        142 allocs/op
+BenchmarkFrequencySort1_41e4-4             20000             88255 ns/op           16645 B/op        100 allocs/op
+BenchmarkFrequencySort_en1e4-4             20000             98461 ns/op           60668 B/op        763 allocs/op
 PASS
+ok      github.com/tfbrother/leetcode/451       24.357s
 */
