@@ -275,7 +275,8 @@ func maxPoints2(points [][]int) int {
 	for i := 0; i < len(points)-1; i++ {
 		// same表示重复的点，初始直线上只有i点，只有一个点与i相同，即本身。
 		countMap, same, max := make(map[string]int, len(points)>>1), 1, 0
-		// TODO 此时为何j从i+1开始？
+		// TODO 此时为何j从i+1开始？因为本质就是组合问题啊。
+		// 选择一条直线，然后统计经过这条直线的点的个数，取最大值。组合问题顺序没有关系的。
 		for j := i + 1; j < len(points); j++ {
 			a, b := points[i][1]-points[j][1], points[i][0]-points[j][0]
 			if a == 0 && b == 0 {
