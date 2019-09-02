@@ -54,3 +54,55 @@ func reverseKNode(head *ListNode, k int) (newHead, tail *ListNode) {
 	head.Next = cur
 	return prev, head
 }
+
+// 解法二：先求出链表的总长度，然后在进行反转
+// 该解法更容易理解，实现。
+func reverseKGroup2(head *ListNode, k int) *ListNode {
+	var dummyNode, prev, cur, next *ListNode
+	var listLen int
+	cur = head
+
+	// 循环遍历链表，获取链表的长度
+	for cur != nil {
+		cur = cur.Next
+		listLen++
+	}
+
+	dummyNode = &ListNode{0, head}
+	// 前一个node
+	prev = dummyNode
+	// 从cur开始翻转k个元素
+	cur = dummyNode.Next
+
+	// 翻转reverseNum次，每次翻转k个元素
+	reverseNum := int(listLen / k)
+	for i := 0; i < reverseNum; i++ {
+		prev.Next, next = reverseList(cur, k)
+		prev = cur
+		cur = next
+	}
+
+	return dummyNode.Next
+}
+
+// 翻转链表的前k个元素，返回新链表的head以及第k+1个元素
+func reverseList(head *ListNode, k int) (newHead, nextHead *ListNode) {
+	var prev, cur, next *ListNode
+	cur = head
+	index := 0
+
+	for index < k {
+		next = cur.Next
+		cur.Next = prev
+		prev = cur
+
+		cur = next
+		index++
+	}
+
+	newHead = prev
+	head.Next = cur
+	nextHead = cur
+
+	return
+}

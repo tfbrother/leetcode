@@ -23,7 +23,7 @@ func sortList(head *ListNode) *ListNode {
 	return mergeList(l, r)
 }
 
-// 将链表从中间一分为二
+// 将链表从中间一分为二[876]
 func partionList(head *ListNode) (head1, head2 *ListNode) {
 	prev, slow, fast := head, head, head
 
