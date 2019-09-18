@@ -106,3 +106,36 @@ func postorderTraversal3(root *TreeNode) []int {
 
 	return values
 }
+
+// 解法四：迭代实现，模拟系统栈
+func postorderTraversal(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+
+	stack, ret := make([]*commond, 1), make([]int, 0)
+	stack[0] = &commond{s: "go", node: root}
+	var top *commond
+
+	for len(stack) > 0 {
+		top, stack = stack[len(stack)-1], stack[:len(stack)-1]
+		if top.s == "go" { // 访问
+			stack = append(stack, &commond{s: "print", node: top.node})
+			if top.node.Right != nil {
+				stack = append(stack, &commond{s: "go", node: top.node.Right})
+			}
+			if top.node.Left != nil {
+				stack = append(stack, &commond{s: "go", node: top.node.Left})
+			}
+		} else {
+			ret = append(ret, top.node.Val)
+		}
+	}
+
+	return ret
+}
+
+type commond struct {
+	s    string
+	node *TreeNode
+}

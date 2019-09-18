@@ -31,9 +31,10 @@ func BenchmarkThreeSum_en1e2(b *testing.B) { bench(b, 1e2, ThreeSum_en, "ThreeSu
 goos: darwin
 goarch: amd64
 pkg: github.com/tfbrother/leetcode/15
-BenchmarkThreeSum21e2-4            20000             68825 ns/op             257 B/op          8 allocs/op
-BenchmarkThreeSum2_11e2-4          20000             66178 ns/op             257 B/op          8 allocs/op
-BenchmarkThreeSum_en1e2-4          20000             60550 ns/op             256 B/op          8 allocs/op
+BenchmarkThreeSum21e2-4     	   20000	     67328 ns/op
+BenchmarkThreeSum2_11e2-4   	   20000	     66810 ns/op
+BenchmarkThreeSum2_21e2-4   	   30000	     62176 ns/op
+BenchmarkThreeSum_en1e2-4   	   20000	     65414 ns/op
 PASS
 ok      github.com/tfbrother/leetcode/15        18.860s
 */
